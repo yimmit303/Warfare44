@@ -4,7 +4,6 @@ import com.github.yimmit.warfare44.Warfare44;
 import com.github.yimmit.warfare44.config.MapConfig;
 import com.github.yimmit.warfare44.config.MapConfigData;
 import com.github.yimmit.warfare44.config.WorldCategory;
-import com.github.yimmit.warfare44.config.WorldConfigData;
 import org.spongepowered.api.command.CommandException;
 import org.spongepowered.api.command.CommandResult;
 import org.spongepowered.api.command.CommandSource;
@@ -37,12 +36,7 @@ public class MakeMapCommand implements CommandExecutor
             Player target = (Player)src;
 
             WorldCategory worlddata = Warfare44.getWarfare44().getWorldData();
-            if(!worlddata.world_data.containsKey(target.getWorld().getName()))
-            {
-                worlddata.world_data.put(target.getWorld().getName(), new WorldConfigData());
-            }
-
-            MapConfig mapdatalist = worlddata.world_data.get(target.getWorld().getName()).mapdata;
+            MapConfig mapdatalist = worlddata.mWorldData.mapdata;
 
             MapConfigData newmapdata = new MapConfigData();
             newmapdata.mMapId = mapdatalist.maps.size();

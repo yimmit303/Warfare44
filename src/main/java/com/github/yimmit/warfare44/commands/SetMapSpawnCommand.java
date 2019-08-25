@@ -42,14 +42,9 @@ public class SetMapSpawnCommand implements CommandExecutor
                 throw new CommandException(Text.of(TextColors.RED, "The second argument must be 1 or 2"));
             }
 
-
             Player target = (Player)src;
             WorldCategory worlddata = Warfare44.getWarfare44().getWorldData();
-            if(!worlddata.world_data.containsKey((target.getWorld().getName())))
-            {
-                throw new CommandException(Text.of(TextColors.RED, "You need to create a map before you can set a spawn on one"));
-            }
-            MapConfig mapdata = worlddata.world_data.get(target.getWorld().getName()).mapdata;
+            MapConfig mapdata = worlddata.mWorldData.mapdata;
             if(mapnum > mapdata.maps.size())
             {
                 throw new CommandException(Text.of(TextColors.RED, "The map number you passed was too big"));
