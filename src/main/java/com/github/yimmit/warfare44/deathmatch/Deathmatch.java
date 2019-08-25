@@ -14,14 +14,16 @@ public class Deathmatch
     private HashSet<UUID> mActivePlayers = new HashSet<>();
     private ArrayList<Integer> mActiveMaps = new ArrayList<>();
 
+    private int mNumMatches;
+
     public Deathmatch()
     {
-        int num_matches = Warfare44.getWarfare44().getConfig().CONFIG.number_of_matches;
-        if(num_matches > Warfare44.getWarfare44().getWorldData().mapdata.maps.size())
+        mNumMatches = Warfare44.getWarfare44().getConfig().CONFIG.number_of_matches;
+        if(mNumMatches > Warfare44.getWarfare44().getWorldData().mapdata.maps.size())
         {
-            num_matches = Warfare44.getWarfare44().getWorldData().mapdata.maps.size();
+            mNumMatches = Warfare44.getWarfare44().getWorldData().mapdata.maps.size();
         }
-        for(int i = 0; i < num_matches; i++)
+        for(int i = 0; i < mNumMatches; i++)
         {
             mMatchList.add(new Match());
         }
@@ -63,7 +65,7 @@ public class Deathmatch
     public void exitMatch(UUID id)
     {
         mActivePlayers.remove(id);
-        for(int i = 0; i < 5; i++)
+        for(int i = 0; i < mNumMatches; i++)
         {
             mMatchList.get(i).removePlayer(id);
         }
