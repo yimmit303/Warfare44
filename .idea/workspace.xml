@@ -54,62 +54,21 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/github/yimmit/warfare44/Warfare44.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="355">
-              <caret line="112" column="29" lean-forward="true" selection-start-line="112" selection-start-column="29" selection-end-line="112" selection-end-column="29" />
+            <state relative-caret-position="175">
+              <caret line="97" column="80" selection-start-line="97" selection-start-column="80" selection-end-line="97" selection-end-column="80" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="method#initConfig#0;class#Warfare44#0" />
                 <element signature="method#saveDataConfig#0;class#Warfare44#0" />
-                <element signature="e#4984#4985#0" expanded="true" />
-                <element signature="e#5025#5026#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/github/yimmit/warfare44/config/WorldCategory.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="60">
-              <caret line="3" column="58" selection-start-line="3" selection-start-column="58" selection-end-line="3" selection-end-column="58" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/github/yimmit/warfare44/commands/ListMatchCommand.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-785">
-              <caret line="20" column="13" selection-start-line="20" selection-start-column="13" selection-end-line="20" selection-end-column="13" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/github/yimmit/warfare44/model/Map.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="40">
-              <caret line="2" column="16" lean-forward="true" selection-start-line="2" selection-start-column="16" selection-end-line="2" selection-end-column="16" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/github/yimmit/warfare44/commands/MakeMapCommand.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="355">
-              <caret line="38" column="45" selection-start-line="38" selection-start-column="45" selection-end-line="38" selection-end-column="45" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/github/yimmit/warfare44/commands/SetMapSpawnCommand.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="455">
@@ -124,10 +83,25 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/github/yimmit/warfare44/commands/ReloadDeathmatchCommand.java">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/github/yimmit/warfare44/listeners/CommandListener.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="40">
-              <caret line="2" column="45" lean-forward="true" selection-start-line="2" selection-start-column="45" selection-end-line="2" selection-end-column="45" />
+            <state relative-caret-position="260">
+              <caret line="13" column="9" lean-forward="true" selection-start-line="13" selection-start-column="9" selection-end-line="13" selection-end-column="9" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/github/yimmit/warfare44/listeners/ConnectionListener.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="420">
+              <caret line="21" selection-start-line="21" selection-end-line="21" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -228,7 +202,6 @@
         <option value="$PROJECT_DIR$/build.gradle" />
         <option value="$PROJECT_DIR$/src/main/java/com/github/yimmit/warfare44/config/CoordConfigData.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/github/yimmit/warfare44/config/W44config.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/github/yimmit/warfare44/Warfare44.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/github/yimmit/warfare44/commands/ReloadDeathmatchCommand.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/github/yimmit/warfare44/config/WorldConfigData.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/github/yimmit/warfare44/config/WorldCategory.java" />
@@ -237,6 +210,8 @@
         <option value="$PROJECT_DIR$/src/main/java/com/github/yimmit/warfare44/deathmatch/Deathmatch.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/github/yimmit/warfare44/commands/MakeMapCommand.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/github/yimmit/warfare44/commands/SetMapSpawnCommand.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/github/yimmit/warfare44/listeners/CommandListener.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/github/yimmit/warfare44/Warfare44.java" />
       </list>
     </option>
   </component>
@@ -495,20 +470,6 @@
     </layout>
   </component>
   <component name="editorHistoryManager">
-    <entry file="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.spongepowered/spongeapi/7.1.0/d35a93c547868e95b5ffa922db11549ef9292cad/spongeapi-7.1.0-sources.jar!/org/spongepowered/api/data/DataHolder.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="434">
-          <caret line="67" column="9" selection-start-line="67" selection-start-column="9" selection-end-line="67" selection-end-column="9" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.spongepowered/spongeapi/7.1.0/d35a93c547868e95b5ffa922db11549ef9292cad/spongeapi-7.1.0-sources.jar!/org/spongepowered/api/block/tileentity/Sign.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="160">
-          <caret line="34" column="17" selection-start-line="34" selection-start-column="17" selection-end-line="34" selection-end-column="17" />
-        </state>
-      </provider>
-    </entry>
     <entry file="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.spongepowered/spongeapi/7.1.0/d35a93c547868e95b5ffa922db11549ef9292cad/spongeapi-7.1.0-sources.jar!/org/spongepowered/api/data/value/BaseValue.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="580">
@@ -699,16 +660,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/github/yimmit/warfare44/listeners/ConnectionListener.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="300">
-          <caret line="21" selection-start-line="21" selection-end-line="21" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/github/yimmit/warfare44/config/SignConfigData.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="180">
@@ -836,20 +787,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/github/yimmit/warfare44/Warfare44.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="355">
-          <caret line="112" column="29" lean-forward="true" selection-start-line="112" selection-start-column="29" selection-end-line="112" selection-end-column="29" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="method#initConfig#0;class#Warfare44#0" />
-            <element signature="method#saveDataConfig#0;class#Warfare44#0" />
-            <element signature="e#4984#4985#0" expanded="true" />
-            <element signature="e#5025#5026#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/github/yimmit/warfare44/commands/ReloadDeathmatchCommand.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="40">
@@ -874,13 +811,6 @@
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/github/yimmit/warfare44/config/WorldCategory.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="60">
-          <caret line="3" column="58" selection-start-line="3" selection-start-column="58" selection-end-line="3" selection-end-column="58" />
         </state>
       </provider>
     </entry>
@@ -921,13 +851,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/github/yimmit/warfare44/commands/ListMatchCommand.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-785">
-          <caret line="20" column="13" selection-start-line="20" selection-start-column="13" selection-end-line="20" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/github/yimmit/warfare44/commands/SetMapSpawnCommand.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="455">
@@ -936,6 +859,59 @@
             <element signature="imports" expanded="true" />
             <element signature="e#1596#1605#0" expanded="true" />
             <element signature="e#1660#1669#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/github/yimmit/warfare44/listeners/ConnectionListener.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="420">
+          <caret line="21" selection-start-line="21" selection-end-line="21" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://C:/Program Files/Java/jdk1.8.0_172/src.zip!/java/lang/String.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="479">
+          <caret line="1152" column="15" selection-start-line="1152" selection-start-column="15" selection-end-line="1152" selection-end-column="15" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/github/yimmit/warfare44/listeners/CommandListener.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="260">
+          <caret line="13" column="9" lean-forward="true" selection-start-line="13" selection-start-column="9" selection-end-line="13" selection-end-column="9" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/github/yimmit/warfare44/commands/ListMatchCommand.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-785">
+          <caret line="20" column="13" selection-start-line="20" selection-start-column="13" selection-end-line="20" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/github/yimmit/warfare44/config/WorldCategory.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="60">
+          <caret line="3" column="58" selection-start-line="3" selection-start-column="58" selection-end-line="3" selection-end-column="58" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/github/yimmit/warfare44/Warfare44.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="175">
+          <caret line="97" column="80" selection-start-line="97" selection-start-column="80" selection-end-line="97" selection-end-column="80" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="method#initConfig#0;class#Warfare44#0" />
+            <element signature="method#saveDataConfig#0;class#Warfare44#0" />
           </folding>
         </state>
       </provider>

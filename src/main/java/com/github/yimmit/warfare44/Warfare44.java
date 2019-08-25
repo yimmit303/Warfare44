@@ -4,10 +4,7 @@ import com.github.yimmit.warfare44.commands.*;
 import com.github.yimmit.warfare44.config.Configcategory;
 import com.github.yimmit.warfare44.config.WorldCategory;
 import com.github.yimmit.warfare44.deathmatch.Deathmatch;
-import com.github.yimmit.warfare44.listeners.ConnectionListener;
-import com.github.yimmit.warfare44.listeners.DisconnectionListener;
-import com.github.yimmit.warfare44.listeners.InteractListener;
-import com.github.yimmit.warfare44.listeners.SignListener;
+import com.github.yimmit.warfare44.listeners.*;
 import ninja.leaping.configurate.ConfigurationNode;
 import ninja.leaping.configurate.ConfigurationOptions;
 import ninja.leaping.configurate.commented.CommentedConfigurationNode;
@@ -98,6 +95,7 @@ public class Warfare44 {
         Sponge.getEventManager().registerListeners(this, new DisconnectionListener());
         Sponge.getEventManager().registerListeners(this, new SignListener());
         Sponge.getEventManager().registerListeners(this, new InteractListener());
+        Sponge.getEventManager().registerListeners(this, new CommandListener());
     }
 
     private void registerCommands()
