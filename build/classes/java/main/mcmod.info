@@ -1,0 +1,14 @@
+[
+    {
+        "modid": "warfare44",
+        "name": "Warfare 44",
+        "version": "0.2.2",
+        "description": "Custom team death matches and classes",
+        "dependencies": [
+            "spongeapi@7.1.0"
+        ],
+        "requiredMods": [
+            "spongeapi@7.1.0"
+        ]
+    }
+]
