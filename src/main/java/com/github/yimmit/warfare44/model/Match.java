@@ -29,7 +29,7 @@ public class Match
 
     private void initialize()
     {
-        Configcategory root = Warfare44.getWarfare44().getRoot();
+        Configcategory root = Warfare44.getWarfare44().getConfig();
         this.inprogress = false;
 
         this.side1score = 0;
