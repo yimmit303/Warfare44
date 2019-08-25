@@ -44,7 +44,7 @@ public class SetMapSpawnCommand implements CommandExecutor
 
             Player target = (Player)src;
             WorldCategory worlddata = Warfare44.getWarfare44().getWorldData();
-            MapConfig mapdata = worlddata.mWorldData.mapdata;
+            MapConfig mapdata = worlddata.mapdata;
             if(mapnum > mapdata.maps.size())
             {
                 throw new CommandException(Text.of(TextColors.RED, "The map number you passed was too big"));

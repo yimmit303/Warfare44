@@ -36,7 +36,7 @@ public class MakeMapCommand implements CommandExecutor
             Player target = (Player)src;
 
             WorldCategory worlddata = Warfare44.getWarfare44().getWorldData();
-            MapConfig mapdatalist = worlddata.mWorldData.mapdata;
+            MapConfig mapdatalist = worlddata.mapdata;
 
             MapConfigData newmapdata = new MapConfigData();
             newmapdata.mMapId = mapdatalist.maps.size();
