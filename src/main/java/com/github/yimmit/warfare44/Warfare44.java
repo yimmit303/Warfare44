@@ -107,6 +107,7 @@ public class Warfare44 {
         game.getCommandManager().register(this, ListMatchCommand.commandSpec(), "listmatch");
         game.getCommandManager().register(this, MakeMapCommand.commandSpec(), "makemap");
         game.getCommandManager().register(this, SetMapSpawnCommand.commandSpec(), "setmapspawn");
+        game.getCommandManager().register(this, ReloadDeathmatchCommand.commandSpec(), "reloaddm");
     }
 
     private void initConfig()
@@ -146,6 +147,11 @@ public class Warfare44 {
         }
     }
 
+    public void reloadDeathmatch()
+    {
+        this.dm = new Deathmatch();
+    }
+
     @Listener
     public void onDisable(GameStoppingServerEvent event) {
 
@@ -170,7 +176,7 @@ public class Warfare44 {
         return cfgLoader;
     }
 
-    public Configcategory getRoot()
+    public Configcategory getConfig()
     {
         return root;
     }
