@@ -34,6 +34,13 @@ public class ListMatchCommand implements CommandExecutor
         if(src instanceof Player || src instanceof ConsoleSource)
         {
             Deathmatch dm = Warfare44.getWarfare44().getDeathMatch();
+
+            if(dm.getMatchNum() == 0)
+            {
+                src.sendMessage(Text.of("There are no matches"));
+                return CommandResult.success();
+            }
+
             ArrayList<String> statuslist = dm.getAllMatchStatus();
 
             for(int i = 0; i < dm.getMatchNum(); i++)
