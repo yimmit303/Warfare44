@@ -12,4 +12,6 @@ public class W44config
     public int time_limit = 900;
     @Setting(value = "points-to-win")
     public int points_to_win = 100;
+    @Setting(value = "number-of-matches")
+    public int number_of_matches = 5;
 }
