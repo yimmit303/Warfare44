@@ -3,7 +3,6 @@ package com.github.yimmit.warfare44.deathmatch;
 import com.github.yimmit.warfare44.Warfare44;
 import com.github.yimmit.warfare44.model.Match;
 import org.spongepowered.api.Game;
-import org.spongepowered.api.command.CommandManager;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -13,10 +12,16 @@ public class Deathmatch
 {
     private ArrayList<Match> mMatchList = new ArrayList<>();
     private HashSet<UUID> mActivePlayers = new HashSet<>();
+    private ArrayList<Integer> mActiveMaps = new ArrayList<>();
 
     public Deathmatch()
     {
-        for(int i = 0; i < 5; i++)
+        int num_matches = Warfare44.getWarfare44().getConfig().CONFIG.number_of_matches;
+        if(num_matches > Warfare44.getWarfare44().getWorldData().mapdata.maps.size())
+        {
+            num_matches = Warfare44.getWarfare44().getWorldData().mapdata.maps.size();
+        }
+        for(int i = 0; i < num_matches; i++)
         {
             mMatchList.add(new Match());
         }
@@ -68,6 +73,18 @@ public class Deathmatch
             game.getCommandManager().process(game.getServer().getPlayer(id).get(), "spawn");
         }
 
+    }
+
+    public void ejectPlayers()
+    {
+        Game game = Warfare44.getWarfare44().getGame();
+        for(UUID id : mActivePlayers)
+        {
+            if(game.getServer().getPlayer(id).isPresent())
+            {
+                game.getCommandManager().process(game.getServer().getPlayer(id).get(), "spawn");
+            }
+        }
     }
 
     public void checkMatch()

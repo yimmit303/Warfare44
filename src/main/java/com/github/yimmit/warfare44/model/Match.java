@@ -70,6 +70,11 @@ public class Match
         return true;
     }
 
+    private void spawnPlayer(UUID id)
+    {
+
+    }
+
     public void removePlayer(UUID id)
     {
         side1.remove(id);
