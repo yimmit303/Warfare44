@@ -100,9 +100,9 @@ public class Warfare44 {
 
     private void registerCommands()
     {
-        game.getCommandManager().register(this, JoinMatchCommand.commandSpec(),"joinmatch");
-        game.getCommandManager().register(this, ExitMatchCommand.commandSpec(), "exitmatch");
-        game.getCommandManager().register(this, ListMatchCommand.commandSpec(), "listmatch");
+        game.getCommandManager().register(this, JoinMatchCommand.commandSpec(),"joinmatch", "join");
+        game.getCommandManager().register(this, ExitMatchCommand.commandSpec(), "exitmatch", "leave");
+        game.getCommandManager().register(this, ListMatchCommand.commandSpec(), "listmatch", "games");
         game.getCommandManager().register(this, MakeMapCommand.commandSpec(), "makemap");
         game.getCommandManager().register(this, SetMapSpawnCommand.commandSpec(), "setmapspawn");
         game.getCommandManager().register(this, ReloadDeathmatchCommand.commandSpec(), "reloaddm");
