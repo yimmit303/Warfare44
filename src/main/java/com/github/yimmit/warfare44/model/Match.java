@@ -2,8 +2,15 @@ package com.github.yimmit.warfare44.model;
 
 import com.github.yimmit.warfare44.Warfare44;
 import com.github.yimmit.warfare44.config.Configcategory;
+import com.github.yimmit.warfare44.config.CoordConfigData;
+import org.slf4j.Logger;
+import org.spongepowered.api.entity.living.player.Player;
+import org.spongepowered.api.world.Location;
+import org.spongepowered.api.world.World;
 
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.Random;
 import java.util.UUID;
 
 public class Match
@@ -67,12 +74,30 @@ public class Match
                 side1.add(id);
             }
         }
+        spawnPlayer(id);
         return true;
     }
 
-    private void spawnPlayer(UUID id)
+    //Randomly selects a spawnpoint for whatever side the player is on
+    public void spawnPlayer(UUID id)
     {
+        Random rand = new Random();
+        ArrayList<CoordConfigData> spawnlist;
 
+        if(side1.contains(id))
+        {
+            spawnlist = Warfare44.getWarfare44().getWorldData().mapdata.maps.get(mapID).mSide1Spawns;
+        }
+        else
+        {
+            spawnlist = Warfare44.getWarfare44().getWorldData().mapdata.maps.get(mapID).mSide2Spawns;
+        }
+
+        CoordConfigData spawncoord = spawnlist.get(rand.nextInt(spawnlist.size()));
+        Player player = Warfare44.getWarfare44().getGame().getServer().getPlayer(id).get();
+        World world = player.getWorld();
+        Location<World> location = new Location<>(world, spawncoord.mX, spawncoord.mY, spawncoord.mZ);
+        player.setLocation(location);
     }
 
     public void removePlayer(UUID id)
@@ -124,6 +149,8 @@ public class Match
     public int getMatchTime() {
         return matchTime;
     }
+
+    public void setMapID(int id){ mapID = id;}
 
     /*
     public String toString()

@@ -3,9 +3,13 @@ package com.github.yimmit.warfare44.deathmatch;
 import com.github.yimmit.warfare44.Warfare44;
 import com.github.yimmit.warfare44.model.Match;
 import org.spongepowered.api.Game;
+import org.spongepowered.api.data.key.Keys;
+import org.spongepowered.api.entity.living.player.Player;
+import org.spongepowered.api.entity.living.player.gamemode.GameModes;
 
 import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.Random;
 import java.util.UUID;
 
 public class Deathmatch
@@ -26,7 +30,26 @@ public class Deathmatch
         for(int i = 0; i < mNumMatches; i++)
         {
             mMatchList.add(new Match());
+            int id = pickMapID();
+            mActiveMaps.add(id);
+            mMatchList.get(i).setMapID(id);
         }
+    }
+
+    private int pickMapID()
+    {
+        ArrayList<Integer> potentialmaps = new ArrayList<>();
+        for(int i = 0; i < Warfare44.getWarfare44().getWorldData().mapdata.maps.size(); i++)
+        {
+            potentialmaps.add(i);
+        }
+        for(Integer id : mActiveMaps)
+        {
+            potentialmaps.remove(id);
+        }
+
+        Random r = new Random();
+        return potentialmaps.get(r.nextInt(potentialmaps.size()));
     }
 
     public int getMatchNum()
@@ -36,12 +59,13 @@ public class Deathmatch
 
     public int joinMatch(UUID id)
     {
-        for(int i = 0; i < 5; i++)
+        for(int i = 0; i < mNumMatches; i++)
         {
             if(mMatchList.get(i).getMaxplayers() <= 10)
             {
                 mMatchList.get(i).addPlayer(id);
                 mActivePlayers.add(id);
+
                 return i+1;
             }
         }
@@ -72,7 +96,9 @@ public class Deathmatch
         Game game = Warfare44.getWarfare44().getGame();
         if(game.getServer().getPlayer(id).isPresent())
         {
-            game.getCommandManager().process(game.getServer().getPlayer(id).get(), "spawn");
+            Player p = game.getServer().getPlayer(id).get();
+            p.offer(Keys.GAME_MODE, GameModes.ADVENTURE);
+            game.getCommandManager().process(p, "spawn");
         }
 
     }
@@ -94,10 +120,7 @@ public class Deathmatch
 
     }
 
-    public boolean isPlayerActive(UUID id)
-    {
-        return mActivePlayers.contains(id);
-    }
+
 
     public boolean clearMatch(int Matchid)
     {
@@ -107,7 +130,7 @@ public class Deathmatch
 
     public void checkStatus()
     {
-        for(int i = 0; i < 5; i++)
+        for(int i = 0; i < mNumMatches; i++)
         {
             int num = this.mMatchList.get(i).getNumPlayer();
             Warfare44.getWarfare44().getLogger().info("Match #" + (i+1) + " Player count:");
@@ -140,4 +163,6 @@ public class Deathmatch
     public ArrayList<Match> getmMatchList() {
         return mMatchList;
     }
+
+    public boolean isPlayerActive(UUID id){return mActivePlayers.contains(id);}
 }
