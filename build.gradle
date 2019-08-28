@@ -7,7 +7,7 @@ plugins {
 compileJava.options.encoding = 'UTF-8'
 
 group 'com.github.yimmit.warfare44'
-version '0.6.11'
+version '0.6.12'
 
 sourceCompatibility = 1.8
 

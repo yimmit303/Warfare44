@@ -23,7 +23,7 @@ public class RespawnListener
             if(dm.getPlayerMatch(victim.getUniqueId()).isPresent())
             {
                 Match m = dm.getPlayerMatch(victim.getUniqueId()).get();
-                event.setToTransform(new Transform<>(m.spawnPlayer(victim.getUniqueId())));
+                event.setToTransform(m.spawnPlayer(victim.getUniqueId()));
             }
         }
 

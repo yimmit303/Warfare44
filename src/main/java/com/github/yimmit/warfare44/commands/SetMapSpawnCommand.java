@@ -57,8 +57,8 @@ public class SetMapSpawnCommand implements CommandExecutor
             newcoords.mZ = target.getLocation().getBlockZ();
 
             newcoords.mRotX = target.getRotation().getX();
-            newcoords.mRotY = target.getRotation().getX();
-            newcoords.mRotZ = target.getRotation().getX();
+            newcoords.mRotY = target.getRotation().getY();
+            newcoords.mRotZ = target.getRotation().getZ();
 
 
             if(sidenum == 1)
