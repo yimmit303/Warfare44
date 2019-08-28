@@ -1,9 +1,11 @@
 package com.github.yimmit.warfare44.model;
 
+import com.flowpowered.math.vector.Vector3d;
 import com.github.yimmit.warfare44.Warfare44;
 import com.github.yimmit.warfare44.config.Configcategory;
 import com.github.yimmit.warfare44.config.CoordConfigData;
 import org.slf4j.Logger;
+import org.spongepowered.api.entity.Transform;
 import org.spongepowered.api.entity.living.player.Player;
 import org.spongepowered.api.world.Location;
 import org.spongepowered.api.world.World;
@@ -79,7 +81,7 @@ public class Match
     }
 
     //Randomly selects a spawnpoint for whatever side the player is on
-    public void spawnPlayer(UUID id)
+    public Transform<World> spawnPlayer(UUID id)
     {
         Random rand = new Random();
         ArrayList<CoordConfigData> spawnlist;
@@ -96,8 +98,13 @@ public class Match
         CoordConfigData spawncoord = spawnlist.get(rand.nextInt(spawnlist.size()));
         Player player = Warfare44.getWarfare44().getGame().getServer().getPlayer(id).get();
         World world = player.getWorld();
-        Location<World> location = new Location<>(world, spawncoord.mX, spawncoord.mY, spawncoord.mZ);
-        player.setLocation(location);
+
+        Vector3d locationvector = new Vector3d(spawncoord.mX, spawncoord.mY, spawncoord.mZ);
+        Vector3d rotationvector = new Vector3d(spawncoord.mRotX, spawncoord.mRotY, spawncoord.mRotZ);
+
+        Transform<World> transform = new Transform<>(world, locationvector, rotationvector);
+        player.setTransform(transform);
+        return transform;
     }
 
     public void removePlayer(UUID id)
@@ -119,6 +126,11 @@ public class Match
         return (side1.size()+side2.size()) == maxplayers;
     }
 
+    public boolean contains(UUID id)
+    {
+        return side1.contains(id) || side2.contains(id);
+    }
+
 
     public int getMaxplayers()
     {
@@ -137,6 +149,10 @@ public class Match
     public int getSide2score() {
         return side2score;
     }
+
+    public void setSide1score(int num){side1score = num;}
+
+    public void setSide2score(int num){side2score = num;}
 
     public HashSet<UUID> getSide1() {
         return side1;

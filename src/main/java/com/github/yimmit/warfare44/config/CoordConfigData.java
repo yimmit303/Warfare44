@@ -14,4 +14,13 @@ public class CoordConfigData
 
     @Setting("Z")
     public int mZ;
+
+    @Setting("Rot X")
+    public double mRotX;
+
+    @Setting("Rot Y")
+    public double mRotY;
+
+    @Setting("Rot Z")
+    public double mRotZ;
 }

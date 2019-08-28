@@ -96,6 +96,8 @@ public class Warfare44 {
         Sponge.getEventManager().registerListeners(this, new SignListener());
         Sponge.getEventManager().registerListeners(this, new InteractListener());
         Sponge.getEventManager().registerListeners(this, new CommandListener());
+        Sponge.getEventManager().registerListeners(this, new DeathListener());
+        Sponge.getEventManager().registerListeners(this, new RespawnListener());
     }
 
     private void registerCommands()

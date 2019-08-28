@@ -7,10 +7,7 @@ import org.spongepowered.api.data.key.Keys;
 import org.spongepowered.api.entity.living.player.Player;
 import org.spongepowered.api.entity.living.player.gamemode.GameModes;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.Random;
-import java.util.UUID;
+import java.util.*;
 
 public class Deathmatch
 {
@@ -158,6 +155,19 @@ public class Deathmatch
 
         }
         return statuslist;
+    }
+
+    public Optional<Match> getPlayerMatch(UUID id)
+    {
+        Optional<Match> optionalmatch = Optional.empty();
+        for(Match m : mMatchList)
+        {
+            if(m.contains(id))
+            {
+                optionalmatch = Optional.of(m);
+            }
+        }
+        return optionalmatch;
     }
 
     public ArrayList<Match> getmMatchList() {
