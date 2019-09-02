@@ -5,6 +5,7 @@ import com.github.yimmit.warfare44.deathmatch.Deathmatch;
 import com.github.yimmit.warfare44.model.Match;
 import org.spongepowered.api.entity.living.player.Player;
 import org.spongepowered.api.event.Listener;
+import org.spongepowered.api.event.cause.entity.damage.source.EntityDamageSource;
 import org.spongepowered.api.event.entity.DestructEntityEvent;
 
 public class DeathListener
@@ -13,10 +14,19 @@ public class DeathListener
     public void onPlayerDeath(DestructEntityEvent.Death event)
     {
 
-        if(!event.getCause().first(Player.class).isPresent() || !(event.getTargetEntity() instanceof Player))
+
+        if(!(event.getCause().first(EntityDamageSource.class).isPresent()) || !(event.getTargetEntity() instanceof Player))
         {
             return;
         }
+
+        EntityDamageSource damagesource = event.getCause().first(EntityDamageSource.class).get();
+
+        if(!(damagesource.getSource() instanceof Player))
+        {
+            return;
+        }
+
 
         Deathmatch dm = Warfare44.getWarfare44().getDeathMatch();
         Player killer = event.getCause().first(Player.class).get();
