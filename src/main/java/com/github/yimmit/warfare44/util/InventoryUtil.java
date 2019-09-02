@@ -5,7 +5,7 @@ import org.spongepowered.api.entity.living.player.Player;
 
 import java.util.UUID;
 
-public class DeathmatchUtil
+public class InventoryUtil
 {
     public static void clearInventory(UUID id)
     {
