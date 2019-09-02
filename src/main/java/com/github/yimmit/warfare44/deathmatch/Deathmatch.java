@@ -94,6 +94,7 @@ public class Deathmatch
         {
             Player p = game.getServer().getPlayer(id).get();
             p.offer(Keys.GAME_MODE, GameModes.ADVENTURE);
+            DeathmatchUtil.clearInventory(id);
             game.getCommandManager().process(p, "spawn");
         }
 
