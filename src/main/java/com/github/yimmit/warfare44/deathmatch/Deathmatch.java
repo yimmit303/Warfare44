@@ -2,6 +2,7 @@ package com.github.yimmit.warfare44.deathmatch;
 
 import com.github.yimmit.warfare44.Warfare44;
 import com.github.yimmit.warfare44.model.Match;
+import com.github.yimmit.warfare44.util.DeathmatchUtil;
 import org.spongepowered.api.Game;
 import org.spongepowered.api.data.key.Keys;
 import org.spongepowered.api.entity.living.player.Player;
@@ -58,11 +59,8 @@ public class Deathmatch
     {
         for(int i = 0; i < mNumMatches; i++)
         {
-            if(mMatchList.get(i).getMaxplayers() <= 10)
+            if(joinMatchByNum(id,i + 1) != -1)
             {
-                mMatchList.get(i).addPlayer(id);
-                mActivePlayers.add(id);
-
                 return i+1;
             }
         }
@@ -73,6 +71,7 @@ public class Deathmatch
     {
         if(!mMatchList.get(matchnum - 1).isFull())
         {
+            DeathmatchUtil.clearInventory(id);
             mMatchList.get(matchnum - 1).addPlayer(id);
             mActivePlayers.add(id);
             return 1;

@@ -15,6 +15,11 @@ import java.util.HashSet;
 import java.util.Random;
 import java.util.UUID;
 
+
+//TODO: Reset match when no one is in it
+//TODO: Maybe remove potion effects on joinmatch
+
+
 public class Match
 {
     public int maxplayers;
