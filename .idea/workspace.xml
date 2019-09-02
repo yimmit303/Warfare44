@@ -98,11 +98,11 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/github/yimmit/warfare44/deathmatch/Deathmatch.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="460">
-              <caret line="96" column="46" selection-start-line="96" selection-start-column="46" selection-end-line="96" selection-end-column="46" />
+            <state relative-caret-position="39">
+              <caret line="90" column="9" lean-forward="true" selection-start-line="90" selection-start-column="9" selection-end-line="90" selection-end-column="9" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="e#1626#1627#0" expanded="true" />
@@ -125,11 +125,11 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/github/yimmit/warfare44/util/DeathmatchUtil.java">
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/github/yimmit/warfare44/util/InventoryUtil.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="180">
-              <caret line="9" column="17" selection-start-line="9" selection-start-column="17" selection-end-line="9" selection-end-column="17" />
+            <state relative-caret-position="140">
+              <caret line="7" column="26" selection-start-line="7" selection-start-column="26" selection-end-line="7" selection-end-column="26" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -230,9 +230,10 @@
         <option value="$PROJECT_DIR$/src/main/java/com/github/yimmit/warfare44/listeners/RespawnListener.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/github/yimmit/warfare44/listeners/DeathListener.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/github/yimmit/warfare44/model/Match.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/github/yimmit/warfare44/util/DeathmatchUtil.java" />
         <option value="$PROJECT_DIR$/build.gradle" />
         <option value="$PROJECT_DIR$/src/main/java/com/github/yimmit/warfare44/deathmatch/Deathmatch.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/github/yimmit/warfare44/util/DeathmatchUtil.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/github/yimmit/warfare44/util/InventoryUtil.java" />
       </list>
     </option>
   </component>
@@ -835,16 +836,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/github/yimmit/warfare44/util/DeathmatchUtil.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="180">
-          <caret line="9" column="17" selection-start-line="9" selection-start-column="17" selection-end-line="9" selection-end-column="17" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/build.gradle">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="280">
@@ -868,8 +859,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/github/yimmit/warfare44/deathmatch/Deathmatch.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="460">
-          <caret line="96" column="46" selection-start-line="96" selection-start-column="46" selection-end-line="96" selection-end-column="46" />
+        <state relative-caret-position="39">
+          <caret line="90" column="9" lean-forward="true" selection-start-line="90" selection-start-column="9" selection-end-line="90" selection-end-column="9" />
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="e#1626#1627#0" expanded="true" />
@@ -878,6 +869,16 @@
             <element signature="method#checkMatch#0;class#Deathmatch#0" />
             <element signature="method#getAllMatchStatus#0;class#Deathmatch#0" />
             <element signature="e#4936#4937#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/github/yimmit/warfare44/util/InventoryUtil.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="140">
+          <caret line="7" column="26" selection-start-line="7" selection-start-column="26" selection-end-line="7" selection-end-column="26" />
+          <folding>
+            <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
