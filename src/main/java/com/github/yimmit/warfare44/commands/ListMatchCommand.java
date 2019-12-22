@@ -2,6 +2,7 @@ package com.github.yimmit.warfare44.commands;
 
 import com.github.yimmit.warfare44.Warfare44;
 import com.github.yimmit.warfare44.deathmatch.Deathmatch;
+import org.slf4j.Logger;
 import org.spongepowered.api.command.CommandException;
 import org.spongepowered.api.command.CommandResult;
 import org.spongepowered.api.command.CommandSource;
@@ -52,7 +53,7 @@ public class ListMatchCommand implements CommandExecutor
                         .build();
                 src.sendMessage(match);                                                         //Match #
 
-                if(statuslist.get(0).equalsIgnoreCase("true"))                      //inprogress TRUE
+                if(statuslist.get(1).equalsIgnoreCase("true"))                      //inprogress TRUE
                 {
                     Text inprogress =
                             Text.builder(statuslist.remove(0)).append(
