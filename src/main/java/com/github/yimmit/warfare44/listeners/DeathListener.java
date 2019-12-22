@@ -39,14 +39,18 @@ public class DeathListener
             if (dm.getPlayerMatch(killer.getUniqueId()).isPresent())
             {
                 Match m = dm.getPlayerMatch(killer.getUniqueId()).get();
-                if(m.getSide2().contains(killer.getUniqueId()))
+                if(m.inprogress)
                 {
-                    m.setSide1score(m.getSide1score() + 1);
+                    if(m.getSide2().contains(killer.getUniqueId()))
+                    {
+                        m.setSide1score(m.getSide1score() + 1);
+                    }
+                    else
+                    {
+                        m.setSide2score(m.getSide2score() + 1);
+                    }
                 }
-                else
-                {
-                    m.setSide2score(m.getSide2score() + 1);
-                }
+
             }
         }
 
