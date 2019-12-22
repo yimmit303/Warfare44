@@ -14,6 +14,12 @@ public class MapConfigData
     @Setting(value = "Map Name")
     public String mMapName = "";
 
+    @Setting(value = "Side 1 Country")
+    public String mSide1Country = "";
+
+    @Setting(value = "Side 2 Country")
+    public String mSide2Country = "";
+
     @Setting(value = "Side 1 spawns")
     public ArrayList<CoordConfigData> mSide1Spawns = new ArrayList<>();
 
