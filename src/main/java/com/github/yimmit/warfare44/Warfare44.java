@@ -45,8 +45,9 @@ public class Warfare44 {
     private Path configDir;
     private ConfigurationLoader<CommentedConfigurationNode> cfgLoader;
     private ConfigurationLoader<CommentedConfigurationNode> dataLoader;
-    private Configcategory root; //Used to access the values of config.conf seen in W44config.javas
+    private Configcategory configData; //Used to access the values of config.conf seen in W44config.javas
     private ConfigurationNode dataNode;
+    private ConfigurationNode configNode;
     private WorldCategory worldData;
 
     private static Warfare44 warfare44;
@@ -103,19 +104,20 @@ public class Warfare44 {
     private void registerCommands()
     {
         game.getCommandManager().register(this, JoinMatchCommand.commandSpec(),"joinmatch", "join");
-        game.getCommandManager().register(this, ExitMatchCommand.commandSpec(), "exitmatch", "leave");
+        game.getCommandManager().register(this, ExitMatchCommand.commandSpec(), "exitmatch", "leave", "exit");
         game.getCommandManager().register(this, ListMatchCommand.commandSpec(), "listmatch", "games");
         game.getCommandManager().register(this, MakeMapCommand.commandSpec(), "makemap");
         game.getCommandManager().register(this, SetMapSpawnCommand.commandSpec(), "setmapspawn");
         game.getCommandManager().register(this, ReloadDeathmatchCommand.commandSpec(), "reloaddm");
+        game.getCommandManager().register(this, SetMapCountriesCommand.commandSpec(), "setmapcountry");
     }
 
     private void initConfig()
     {
         try {
-            ConfigurationNode configRoot = cfgLoader.load(ConfigurationOptions.defaults().setObjectMapperFactory(factory).setShouldCopyDefaults(true));
-            root = configRoot.getValue(of(Configcategory.class), new Configcategory());
-            cfgLoader.save(configRoot);
+            configNode = cfgLoader.load(ConfigurationOptions.defaults().setObjectMapperFactory(factory).setShouldCopyDefaults(true));
+            configData = configNode.getValue(of(Configcategory.class), new Configcategory());
+            cfgLoader.save(configNode);
 
             dataNode = dataLoader.load(ConfigurationOptions.defaults().setObjectMapperFactory(factory).setShouldCopyDefaults(true));
             worldData = dataNode.getValue(of(WorldCategory.class), new WorldCategory());
@@ -140,6 +142,26 @@ public class Warfare44 {
         try
         {
             dataLoader.save(dataNode);
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+        }
+    }
+
+    public void saveConfig()
+    {
+        try
+        {
+            configNode.setValue(of(Configcategory.class), configData);
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+        }
+        try
+        {
+            cfgLoader.save(configNode);
         }
         catch (Exception e)
         {
@@ -178,7 +200,7 @@ public class Warfare44 {
 
     public Configcategory getConfig()
     {
-        return root;
+        return configData;
     }
 
     public ConfigurationLoader<CommentedConfigurationNode> getDataLoader() {

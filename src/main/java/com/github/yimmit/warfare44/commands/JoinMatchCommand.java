@@ -24,7 +24,8 @@ public class JoinMatchCommand implements CommandExecutor
                 .permission("warfare44.command.joinMatch")
                 .executor(new JoinMatchCommand())
                 .arguments(
-                        GenericArguments.optional(GenericArguments.integer(Text.of("Match number")))
+                        GenericArguments.optional(GenericArguments.integer(Text.of("Match number"))),
+                        GenericArguments.optional(GenericArguments.string(Text.of("Class")))
                 ).build();
     }
 
@@ -37,11 +38,18 @@ public class JoinMatchCommand implements CommandExecutor
                 Deathmatch dm = Warfare44.getWarfare44().getDeathMatch();
                 if(!dm.isPlayerActive(sender.getUniqueId()))
                 {
+                    Optional<String> optclass = args.getOne("Class");
+                    String playerclass = "Assault";
+                    if (optclass.isPresent())
+                    {
+                        playerclass = optclass.get();
+                    }
+
                     Optional<Integer> optmatchnum = args.getOne("Match number");
                     if(optmatchnum.isPresent())
                     {
                         int matchnum = optmatchnum.get();
-                        int result = dm.joinMatchByNum(sender.getUniqueId(), matchnum);
+                        int result = dm.joinMatchByNum(sender.getUniqueId(), matchnum, playerclass);
                         if(result == -1)
                         {
                             throw new CommandException(Text.of(TextColors.RED, "Specified match is full"));
@@ -52,7 +60,7 @@ public class JoinMatchCommand implements CommandExecutor
                             return CommandResult.success();
                         }
                     }
-                    int resultmatchnum = dm.joinMatch(sender.getUniqueId());
+                    int resultmatchnum = dm.joinMatch(sender.getUniqueId(), playerclass);
                     if(resultmatchnum > 0)
                     {
                         src.sendMessage(Text.of("Joined match #" + resultmatchnum + " successfully"));
