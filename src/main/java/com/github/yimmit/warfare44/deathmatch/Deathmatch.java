@@ -1,6 +1,8 @@
 package com.github.yimmit.warfare44.deathmatch;
 
 import com.github.yimmit.warfare44.Warfare44;
+import com.github.yimmit.warfare44.config.ClassConfigData;
+import com.github.yimmit.warfare44.config.ClassConfigGearData;
 import com.github.yimmit.warfare44.model.Match;
 import com.github.yimmit.warfare44.util.InventoryUtil;
 import org.slf4j.Logger;
@@ -35,12 +37,6 @@ public class Deathmatch
             mActiveMaps.add(id);
             mMatchList.get(i).setMapID(id);
         }
-        Logger logger = Warfare44.getWarfare44().getLogger();
-
-        for(CatalogType cattype : Warfare44.getWarfare44().getGame().getRegistry().getAllOf(ItemType.class))
-        {
-            logger.info(cattype.toString());
-        }
     }
 
     private int pickMapID()
@@ -64,11 +60,11 @@ public class Deathmatch
         return mMatchList.size();
     }
 
-    public int joinMatch(UUID id)
+    public int joinMatch(UUID id, String playerclass)
     {
         for(int i = 0; i < mNumMatches; i++)
         {
-            if(joinMatchByNum(id,i + 1) != -1)
+            if(joinMatchByNum(id,i + 1, playerclass) != -1)
             {
                 return i+1;
             }
@@ -76,13 +72,12 @@ public class Deathmatch
         return -1;
     }
 
-    public int joinMatchByNum(UUID id, int matchnum)
+    public int joinMatchByNum(UUID id, int matchnum, String playerclass)
     {
         if(!mMatchList.get(matchnum - 1).isFull())
         {
-            InventoryUtil.clearInventory(id);
-            InventoryUtil.giveItem(id);
-            mMatchList.get(matchnum - 1).addPlayer(id);
+            int sidenum = mMatchList.get(matchnum - 1).addPlayer(id, playerclass);
+
             mActivePlayers.add(id);
             return 1;
         }

@@ -3,9 +3,11 @@ package com.github.yimmit.warfare44.listeners;
 import com.github.yimmit.warfare44.Warfare44;
 import com.github.yimmit.warfare44.deathmatch.Deathmatch;
 import com.github.yimmit.warfare44.model.Match;
+import org.slf4j.Logger;
 import org.spongepowered.api.entity.living.player.Player;
 import org.spongepowered.api.event.Listener;
 import org.spongepowered.api.event.entity.living.humanoid.player.RespawnPlayerEvent;
+import org.spongepowered.api.scheduler.Task;
 
 public class RespawnListener
 {
@@ -21,6 +23,12 @@ public class RespawnListener
             {
                 Match m = dm.getPlayerMatch(victim.getUniqueId()).get();
                 event.setToTransform(m.spawnPlayer(victim.getUniqueId()));
+                Logger logger = Warfare44.getWarfare44().getLogger();
+                logger.info("Task about to execute");
+                Task.builder().execute(t -> {
+                    m.supply(victim.getUniqueId(), m.getPlayerClass(victim.getUniqueId()));
+                }).submit(Warfare44.getWarfare44());
+                logger.info("Task submitted");
             }
         }
 
