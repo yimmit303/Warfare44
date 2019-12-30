@@ -26,6 +26,7 @@ import org.slf4j.Logger;
 
 import java.io.File;
 import java.nio.file.Path;
+import java.util.ArrayList;
 
 
 @Plugin(id = "warfare44", name = "Warfare 44", version = "0.2.2", description = "Custom team death matches and classes")
@@ -49,6 +50,7 @@ public class Warfare44 {
     private ConfigurationNode dataNode;
     private ConfigurationNode configNode;
     private WorldCategory worldData;
+    private ArrayList<String> validClasses;
 
     private static Warfare44 warfare44;
     private Deathmatch dm;
@@ -57,7 +59,10 @@ public class Warfare44 {
     @Listener
     public void onServerStart(GameStartedServerEvent event)
     {
-
+        validClasses.add("assault");
+        validClasses.add("recon");
+        validClasses.add("medic");
+        validClasses.add("support");
         if(!configDir.toFile().exists())
         {
             configDir.toFile().mkdir();
@@ -221,4 +226,8 @@ public class Warfare44 {
         return warfare44;
     }
 
+    public ArrayList<String> getValidClasses()
+    {
+        return validClasses;
+    }
 }
