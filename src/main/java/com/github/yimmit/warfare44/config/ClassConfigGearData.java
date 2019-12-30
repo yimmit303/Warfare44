@@ -10,4 +10,12 @@ public class ClassConfigGearData
     public String mPrimary;
     @Setting(value = "secondary")
     public String mSecondary;
+    @Setting(value = "head")
+    public String mHead;
+    @Setting(value = "chest")
+    public String mChest;
+    @Setting(value = "legs")
+    public String mLegs;
+    @Setting(value = "boots")
+    public String mBoots;
 }
