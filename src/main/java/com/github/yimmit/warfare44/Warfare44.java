@@ -50,7 +50,7 @@ public class Warfare44 {
     private ConfigurationNode dataNode;
     private ConfigurationNode configNode;
     private WorldCategory worldData;
-    private ArrayList<String> validClasses;
+    private ArrayList<String> validClasses = new ArrayList<>();
 
     private static Warfare44 warfare44;
     private Deathmatch dm;
