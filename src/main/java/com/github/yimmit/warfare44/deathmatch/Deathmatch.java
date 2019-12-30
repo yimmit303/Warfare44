@@ -1,17 +1,13 @@
 package com.github.yimmit.warfare44.deathmatch;
 
 import com.github.yimmit.warfare44.Warfare44;
-import com.github.yimmit.warfare44.config.ClassConfigData;
-import com.github.yimmit.warfare44.config.ClassConfigGearData;
 import com.github.yimmit.warfare44.model.Match;
 import com.github.yimmit.warfare44.util.InventoryUtil;
 import org.slf4j.Logger;
-import org.spongepowered.api.CatalogType;
 import org.spongepowered.api.Game;
 import org.spongepowered.api.data.key.Keys;
 import org.spongepowered.api.entity.living.player.Player;
 import org.spongepowered.api.entity.living.player.gamemode.GameModes;
-import org.spongepowered.api.item.ItemType;
 
 import java.util.*;
 
