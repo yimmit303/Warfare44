@@ -9,7 +9,8 @@ import org.slf4j.Logger;
 import org.spongepowered.api.entity.Transform;
 import org.spongepowered.api.entity.living.player.Player;
 import org.spongepowered.api.scheduler.Task;
-import org.spongepowered.api.world.Location;
+import org.spongepowered.api.text.Text;
+import org.spongepowered.api.text.title.Title;
 import org.spongepowered.api.world.World;
 
 import java.util.*;
@@ -17,10 +18,9 @@ import java.util.concurrent.TimeUnit;
 
 
 //TODO: Maybe remove potion effects on joinmatch
-//TODO: Make the timer actually tick down
-//TODO: When timer is done tell the players if they won or lost
 //TODO: Scoreboard
-//TODO: Make match only start when two players are in it
+//TODO: Test end of match
+//TODO: Remove testing values
 
 
 public class Match
@@ -53,9 +53,62 @@ public class Match
 
         this.side1score = 0;
         this.side2score = 0;
-        this.matchTime = root.CONFIG.time_limit;
+        this.matchTime = 120;//root.CONFIG.time_limit;
         this.maxplayers = root.CONFIG.players_per_match;
-        countdown(this.matchTime);
+    }
+
+    private void beginMatch()
+    {
+        this.inprogress = true;
+        countdown();
+        for(UUID id : side1)
+        {
+            spawnPlayer(id);
+        }
+        for(UUID id : side2)
+        {
+            spawnPlayer(id);
+        }
+        titleToSide1("The match is starting");
+        titleToSide2("The match is starting");
+    }
+
+    private void endMatch()
+    {
+        if(side1score > side2score)
+        {
+            titleToSide1("You win!");
+            titleToSide2("You lose!");
+        }
+        else if(side1score < side2score)
+        {
+            titleToSide1("You lose!");
+            titleToSide2("You win!");
+        }
+        else
+        {
+            titleToSide1("It was a tie.");
+            titleToSide2("It was a tie.");
+        }
+        reset();
+    }
+
+    private void titleToSide1(String text)
+    {
+        for(UUID id : side1)
+        {
+            Player player = Warfare44.getWarfare44().getGame().getServer().getPlayer(id).get();
+            player.sendTitle(Title.builder().title(Text.of(text)).build());
+        }
+    }
+
+    private void titleToSide2(String text)
+    {
+        for(UUID id : side2)
+        {
+            Player player = Warfare44.getWarfare44().getGame().getServer().getPlayer(id).get();
+            player.sendTitle(Title.builder().title(Text.of(text)).build());
+        }
     }
 
     public int addPlayer(UUID id, String playerclass)
@@ -93,11 +146,11 @@ public class Match
                 side = 1;
             }
         }
-        if (side1.size() + side2.size() >= 2)
-        {
-
-        }
         playerClasses.put(id, playerclass);
+        if (side1.size() + side2.size() >= 1)
+        {
+            beginMatch();
+        }
         spawnPlayer(id);
         return side;
     }
@@ -126,8 +179,6 @@ public class Match
 
         Transform<World> transform = new Transform<>(world, locationvector, rotationvector);
         player.setTransform(transform);
-        Logger log = Warfare44.getWarfare44().getLogger();
-        log.info("We are spawning the player. About to supply");
         supply(id, playerClasses.get(id));
         return transform;
     }
@@ -148,21 +199,31 @@ public class Match
 
         String country = getSidecountry(getPlayerSide(id));
 
-        InventoryUtil.giveItem(id, "modularwarfare:w44." + Warfare44.getWarfare44().getConfig().CLASSES.mCountryClassList.get(country).mClassList.get(playerclass).mPrimary, 1);
-        InventoryUtil.giveMaxItem(id, "modularwarfare:w44." + Warfare44.getWarfare44().getConfig().CLASSES.mCountryClassList.get(country).mClassList.get(playerclass).mPrimary + "ammo");
-        InventoryUtil.giveItem(id, "modularwarfare:w44." + Warfare44.getWarfare44().getConfig().CLASSES.mCountryClassList.get(country).mClassList.get(playerclass).mSecondary, 1);
-        InventoryUtil.giveMaxItem(id, "modularwarfare:w44." + Warfare44.getWarfare44().getConfig().CLASSES.mCountryClassList.get(country).mClassList.get(playerclass).mSecondary + "ammo");
+        InventoryUtil.giveItem(id, "modulus:w44." + Warfare44.getWarfare44().getConfig().CLASSES.mCountryClassList.get(country).mClassList.get(playerclass).mPrimary, 1);
+        InventoryUtil.giveMaxItem(id, "modulus:w44." + Warfare44.getWarfare44().getConfig().CLASSES.mCountryClassList.get(country).mClassList.get(playerclass).mPrimary + "ammo");
+        InventoryUtil.giveItem(id, "modulus:w44." + Warfare44.getWarfare44().getConfig().CLASSES.mCountryClassList.get(country).mClassList.get(playerclass).mSecondary, 1);
+        InventoryUtil.giveMaxItem(id, "modulus:w44." + Warfare44.getWarfare44().getConfig().CLASSES.mCountryClassList.get(country).mClassList.get(playerclass).mSecondary + "ammo");
 
+        InventoryUtil.giveHead(id, "modulus:w44." + Warfare44.getWarfare44().getConfig().CLASSES.mCountryClassList.get(country).mClassList.get(playerclass).mHead);
+        InventoryUtil.giveChest(id, "modulus:w44." + Warfare44.getWarfare44().getConfig().CLASSES.mCountryClassList.get(country).mClassList.get(playerclass).mChest);
+        InventoryUtil.giveLegs(id, "modulus:w44." + Warfare44.getWarfare44().getConfig().CLASSES.mCountryClassList.get(country).mClassList.get(playerclass).mLegs);
+        InventoryUtil.giveBoots(id, "modulus:w44." + Warfare44.getWarfare44().getConfig().CLASSES.mCountryClassList.get(country).mClassList.get(playerclass).mBoots);
     }
 
-    private void countdown(int time)
+    private void countdown()
     {
-        Logger log = Warfare44.getWarfare44().getLogger();
-        log.info("Time remaining: " + Integer.toString(this.matchTime));
-        this.matchTime -= 1;
-        Task.builder().delay(1, TimeUnit.SECONDS).execute(t -> {
-            countdown(matchTime);
-        }).submit(Warfare44.getWarfare44());
+        if (this.inprogress)
+        {
+            if(this.matchTime <= 0)
+            {
+                endMatch();
+                return;
+            }
+            this.matchTime -= 1;
+            Task.builder().delay(1, TimeUnit.SECONDS).execute(t -> {
+                countdown();
+            }).submit(Warfare44.getWarfare44());
+        }
     }
 
     public void reset()
@@ -204,11 +265,26 @@ public class Match
 
     public int getSide2score() {
         return side2score;
+
     }
 
-    public void setSide1score(int num){side1score = num;}
+    public void setSide1score(int num)
+    {
+        side1score = num;
+        if(side1score >= 5)// Warfare44.getWarfare44().getConfig().CONFIG.points_to_win)
+        {
+            endMatch();
+        }
+    }
 
-    public void setSide2score(int num){side2score = num;}
+    public void setSide2score(int num)
+    {
+        side2score = num;
+        if(side2score >= 5)//Warfare44.getWarfare44().getConfig().CONFIG.points_to_win)
+        {
+            endMatch();
+        }
+    }
 
     private String getSidecountry(int side)
     {
