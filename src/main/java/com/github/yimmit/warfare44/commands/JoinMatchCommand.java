@@ -14,6 +14,7 @@ import org.spongepowered.api.entity.living.player.Player;
 import org.spongepowered.api.text.Text;
 import org.spongepowered.api.text.format.TextColors;
 
+import java.util.ArrayList;
 import java.util.Optional;
 
 public class JoinMatchCommand implements CommandExecutor
@@ -39,11 +40,21 @@ public class JoinMatchCommand implements CommandExecutor
                 if(!dm.isPlayerActive(sender.getUniqueId()))
                 {
                     Optional<String> optclass = args.getOne("Class");
-                    String playerclass = "Assault";
+                    String playerclass = "assault";
+
+
                     if (optclass.isPresent())
                     {
-                        playerclass = optclass.get();
+                        if (Warfare44.getWarfare44().getValidClasses().contains(optclass.get().toLowerCase()))
+                        {
+                            playerclass = optclass.get().toLowerCase();
+                        }
+                        else
+                        {
+                            throw new CommandException(Text.of(TextColors.RED, "Invalid Class name given"));
+                        }
                     }
+
 
                     Optional<Integer> optmatchnum = args.getOne("Match number");
                     if(optmatchnum.isPresent())
