@@ -23,12 +23,9 @@ public class RespawnListener
             {
                 Match m = dm.getPlayerMatch(victim.getUniqueId()).get();
                 event.setToTransform(m.spawnPlayer(victim.getUniqueId()));
-                Logger logger = Warfare44.getWarfare44().getLogger();
-                logger.info("Task about to execute");
                 Task.builder().execute(t -> {
                     m.supply(victim.getUniqueId(), m.getPlayerClass(victim.getUniqueId()));
                 }).submit(Warfare44.getWarfare44());
-                logger.info("Task submitted");
             }
         }
 

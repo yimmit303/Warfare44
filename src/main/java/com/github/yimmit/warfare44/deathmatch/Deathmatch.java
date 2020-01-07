@@ -3,7 +3,6 @@ package com.github.yimmit.warfare44.deathmatch;
 import com.github.yimmit.warfare44.Warfare44;
 import com.github.yimmit.warfare44.model.Match;
 import com.github.yimmit.warfare44.util.InventoryUtil;
-import org.slf4j.Logger;
 import org.spongepowered.api.Game;
 import org.spongepowered.api.data.key.Keys;
 import org.spongepowered.api.entity.living.player.Player;
@@ -93,10 +92,10 @@ public class Deathmatch
         Game game = Warfare44.getWarfare44().getGame();
         if(game.getServer().getPlayer(id).isPresent())
         {
-            Player p = game.getServer().getPlayer(id).get();
-            p.offer(Keys.GAME_MODE, GameModes.ADVENTURE);
+            Player player = game.getServer().getPlayer(id).get();
+            player.offer(Keys.GAME_MODE, GameModes.ADVENTURE);
             InventoryUtil.clearInventory(id);
-            game.getCommandManager().process(p, "spawn");
+            game.getCommandManager().process(player, "spawn");
         }
 
     }
@@ -113,28 +112,12 @@ public class Deathmatch
         }
     }
 
-    public void checkMatch()
-    {
-
-    }
-
-
-
     public boolean clearMatch(int Matchid)
     {
         this.mMatchList.get(Matchid).reset();
         return true;
     }
 
-    public void checkStatus()
-    {
-        for(int i = 0; i < mNumMatches; i++)
-        {
-            int num = this.mMatchList.get(i).getNumPlayer();
-            Warfare44.getWarfare44().getLogger().info("Match #" + (i+1) + " Player count:");
-            Warfare44.getWarfare44().getLogger().info(Integer.toString(num));
-        }
-    }
 
     public ArrayList<String> getAllMatchStatus()
     {
@@ -144,6 +127,7 @@ public class Deathmatch
         {
             Match match = mMatchList.get(i);
             statuslist.add("Match " + (i+1));
+            statuslist.add("Map Name: " + match.getMapName());
             statuslist.add("In Progress: ");
             statuslist.add("" + match.inprogress);
             statuslist.add("Time left: " + match.getMatchTime() + "s");
@@ -169,6 +153,18 @@ public class Deathmatch
             }
         }
         return optionalmatch;
+    }
+
+    public int getFirstOpenMatch()
+    {
+        for(int i = 0; i < mMatchList.size(); i++)
+        {
+            if(!mMatchList.get(i).isFull())
+            {
+                return i + 1;
+            }
+        }
+        return -1;
     }
 
     public ArrayList<Match> getmMatchList() {

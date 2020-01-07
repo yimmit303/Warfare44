@@ -16,15 +16,9 @@ import java.util.Arrays;
 public class InteractListener
 {
     @Listener(order = Order.LATE)
-    public void onInteractSign(InteractBlockEvent e, @First Player p) {
-        BlockSnapshot b = e.getTargetBlock();
-        if (b.getState().getType().equals(BlockTypes.WALL_SIGN) || b.getState().getType().equals(BlockTypes.STANDING_SIGN)) {
-            if (!b.getLocation().get().hasTileEntity()) return;
+    public void onInteractSign(InteractBlockEvent e, @First Player p)
+    {
 
-            Sign s = (Sign) b.getLocation().get().getTileEntity().get();
-
-            s.offer(Keys.SIGN_LINES, Arrays.asList(Text.of("God fuck"), Text.of("These Fucking"), Text.of("Signs")));
-        }
     }
 
 }

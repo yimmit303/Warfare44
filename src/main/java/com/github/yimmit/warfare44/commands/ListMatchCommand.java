@@ -53,6 +53,8 @@ public class ListMatchCommand implements CommandExecutor
                         .build();
                 src.sendMessage(match);                                                         //Match #
 
+                src.sendMessage(Text.of(statuslist.remove(0)));                           // Map Name
+
                 if(statuslist.get(1).equalsIgnoreCase("true"))                      //inprogress TRUE
                 {
                     Text inprogress =

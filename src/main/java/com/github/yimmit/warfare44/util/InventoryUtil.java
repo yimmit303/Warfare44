@@ -6,6 +6,7 @@ import org.spongepowered.api.item.ItemType;
 import org.spongepowered.api.item.inventory.ItemStack;
 import org.spongepowered.api.text.Text;
 import org.spongepowered.api.text.format.TextColors;
+import io.modworks.modulus.api.ArmorApi;
 
 import java.util.UUID;
 
@@ -18,6 +19,11 @@ public class InventoryUtil
             Player player = Warfare44.getWarfare44().getGame().getServer().getPlayer(id).get();
             player.getInventory().clear();
         }
+    }
+
+    public static ItemStack getItemStackByName(String itemname)
+    {
+        return ItemStack.builder().itemType(Warfare44.getWarfare44().getGame().getRegistry().getType(ItemType.class, itemname).get()).build();
     }
 
     public static void giveItem(UUID id, String itemname, int number)
@@ -120,5 +126,9 @@ public class InventoryUtil
                 player.sendMessage(Text.of(TextColors.RED, "Error getting item of name " + itemname + " please report this error to staff or the discord"));
             }
         }
+    }
+
+    public static void giveAccessory(UUID id, String itemname, String accslot)
+    {
     }
 }

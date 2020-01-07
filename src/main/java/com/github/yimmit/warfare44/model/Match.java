@@ -19,8 +19,6 @@ import java.util.concurrent.TimeUnit;
 
 //TODO: Maybe remove potion effects on joinmatch
 //TODO: Scoreboard
-//TODO: Test end of match
-//TODO: Remove testing values
 
 
 public class Match
@@ -53,7 +51,7 @@ public class Match
 
         this.side1score = 0;
         this.side2score = 0;
-        this.matchTime = 120;//root.CONFIG.time_limit;
+        this.matchTime = root.CONFIG.time_limit;
         this.maxplayers = root.CONFIG.players_per_match;
     }
 
@@ -147,7 +145,7 @@ public class Match
             }
         }
         playerClasses.put(id, playerclass);
-        if (side1.size() + side2.size() >= 1)
+        if (side1.size() + side2.size() == 2)
         {
             beginMatch();
         }
@@ -199,8 +197,19 @@ public class Match
 
         String country = getSidecountry(getPlayerSide(id));
 
+        // Gives the primary weapon
         InventoryUtil.giveItem(id, "modulus:w44." + Warfare44.getWarfare44().getConfig().CLASSES.mCountryClassList.get(country).mClassList.get(playerclass).mPrimary, 1);
-        InventoryUtil.giveMaxItem(id, "modulus:w44." + Warfare44.getWarfare44().getConfig().CLASSES.mCountryClassList.get(country).mClassList.get(playerclass).mPrimary + "ammo");
+
+        // Tries to give the player an item named mPrimary + "ammo"
+        // Some weapons don't follow this so the AmmoOverride will be set if that is the case
+        if(Warfare44.getWarfare44().getConfig().CLASSES.mCountryClassList.get(country).mClassList.get(playerclass).mPrimaryAmmoOverride.equals(""))
+        {
+            InventoryUtil.giveMaxItem(id, "modulus:w44." + Warfare44.getWarfare44().getConfig().CLASSES.mCountryClassList.get(country).mClassList.get(playerclass).mPrimary + "ammo");
+        }
+        else
+        {
+            InventoryUtil.giveMaxItem(id, "modulus:w44." + Warfare44.getWarfare44().getConfig().CLASSES.mCountryClassList.get(country).mClassList.get(playerclass).mPrimaryAmmoOverride);
+        }
         InventoryUtil.giveItem(id, "modulus:w44." + Warfare44.getWarfare44().getConfig().CLASSES.mCountryClassList.get(country).mClassList.get(playerclass).mSecondary, 1);
         InventoryUtil.giveMaxItem(id, "modulus:w44." + Warfare44.getWarfare44().getConfig().CLASSES.mCountryClassList.get(country).mClassList.get(playerclass).mSecondary + "ammo");
 
@@ -228,6 +237,16 @@ public class Match
 
     public void reset()
     {
+
+        for(UUID id : side1)
+        {
+            Warfare44.getWarfare44().getGame().getCommandManager().process(Warfare44.getWarfare44().getGame().getServer().getPlayer(id).get(), "spawn");
+        }
+        for(UUID id : side2)
+        {
+            Warfare44.getWarfare44().getGame().getCommandManager().process(Warfare44.getWarfare44().getGame().getServer().getPlayer(id).get(), "spawn");
+        }
+
         this.side1.clear();
         this.side2.clear();
 
@@ -271,7 +290,7 @@ public class Match
     public void setSide1score(int num)
     {
         side1score = num;
-        if(side1score >= 5)// Warfare44.getWarfare44().getConfig().CONFIG.points_to_win)
+        if(side1score >= Warfare44.getWarfare44().getConfig().CONFIG.points_to_win)
         {
             endMatch();
         }
@@ -280,13 +299,13 @@ public class Match
     public void setSide2score(int num)
     {
         side2score = num;
-        if(side2score >= 5)//Warfare44.getWarfare44().getConfig().CONFIG.points_to_win)
+        if(side2score >= Warfare44.getWarfare44().getConfig().CONFIG.points_to_win)
         {
             endMatch();
         }
     }
 
-    private String getSidecountry(int side)
+    public String getSidecountry(int side)
     {
         if (side == 1)
         {
@@ -296,6 +315,11 @@ public class Match
         {
             return Warfare44.getWarfare44().getWorldData().mapdata.maps.get(mapID).mSide2Country;
         }
+    }
+
+    public String getMapName()
+    {
+        return (Warfare44.getWarfare44().getWorldData().mapdata.maps.get(mapID).mMapName);
     }
 
     private int getPlayerSide(UUID id)

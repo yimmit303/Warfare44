@@ -2,6 +2,7 @@ package com.github.yimmit.warfare44.commands;
 
 import com.github.yimmit.warfare44.Warfare44;
 import com.github.yimmit.warfare44.deathmatch.Deathmatch;
+import com.github.yimmit.warfare44.util.MenuUtil;
 import org.spongepowered.api.Server;
 import org.spongepowered.api.command.CommandException;
 import org.spongepowered.api.command.CommandResult;
@@ -53,6 +54,20 @@ public class JoinMatchCommand implements CommandExecutor
                         {
                             throw new CommandException(Text.of(TextColors.RED, "Invalid Class name given"));
                         }
+                    }
+                    else
+                    {
+                        MenuUtil menu = new MenuUtil();
+                        Optional<Integer> optmatchnum = args.getOne("Match number");
+                        if(optmatchnum.isPresent())
+                        {
+                            menu.openInventory(sender, menu.createClassMenu(optmatchnum.get()));
+                        }
+                        else
+                        {
+                            menu.openInventory(sender, menu.createClassMenu(-1));
+                        }
+                        return CommandResult.success();
                     }
 
 

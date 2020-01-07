@@ -9,6 +9,6 @@ import java.util.HashMap;
 public class ClassConfig
 {
     @Setting(value = "country")
-    public HashMap<String, ClassConfigData> mCountryClassList = new HashMap<>(); // In the form { "Germany" : GermanClassData ...}
+    public HashMap<String, ClassConfigData> mCountryClassList = new HashMap<>(); // In the form { "German" : GermanClassData ...}
 
 }
