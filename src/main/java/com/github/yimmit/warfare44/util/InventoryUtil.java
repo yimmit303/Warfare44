@@ -1,134 +1,167 @@
 package com.github.yimmit.warfare44.util;
 
 import com.github.yimmit.warfare44.Warfare44;
+
 import org.spongepowered.api.entity.living.player.Player;
 import org.spongepowered.api.item.ItemType;
 import org.spongepowered.api.item.inventory.ItemStack;
 import org.spongepowered.api.text.Text;
 import org.spongepowered.api.text.format.TextColors;
 import io.modworks.modulus.api.ArmorApi;
+import io.modworks.modulus.Modulus;
+import io.modworks.modulus.api.MArmorType;
+import net.minecraft.entity.player.EntityPlayer;
 
+import java.util.ArrayList;
 import java.util.UUID;
 
-public class InventoryUtil
-{
+public class InventoryUtil {
     public static void clearInventory(UUID id)
     {
-        if(Warfare44.getWarfare44().getGame().getServer().getPlayer(id).isPresent())
+        if (Warfare44.getWarfare44().getGame().getServer().getPlayer(id).isPresent())
         {
             Player player = Warfare44.getWarfare44().getGame().getServer().getPlayer(id).get();
             player.getInventory().clear();
+            clearAccesories(id);
         }
     }
 
-    public static ItemStack getItemStackByName(String itemname)
+    private static void clearAccesories(UUID id)
     {
-        return ItemStack.builder().itemType(Warfare44.getWarfare44().getGame().getRegistry().getType(ItemType.class, itemname).get()).build();
+        String[] AccesorieSlots = {
+                "UpperFace"
+                , "LowerFace"
+                , "Gloves"
+                , "Arms"
+                , "Accessory"
+                , "Backpack"
+                , "Vest"
+        };
+        for(int i = 0; i < 7; i++)
+        {
+            String accessorySlot = AccesorieSlots[i];
+            Player player = Warfare44.getWarfare44().getGame().getServer().getPlayer(id).get();
+            MArmorType type = MArmorType.valueOf(accessorySlot);
+            ArmorApi.setArmorInSlot((EntityPlayer) player, type.getFirstSlot(), new net.minecraft.item.ItemStack(Modulus.specialArmorTypes.get("")));
+        }
+
+
     }
 
-    public static void giveItem(UUID id, String itemname, int number)
+    public static ItemStack getItemStackByName(String itemName)
     {
-        if(Warfare44.getWarfare44().getGame().getServer().getPlayer(id).isPresent())
+        return ItemStack.builder().itemType(Warfare44.getWarfare44().getGame().getRegistry().getType(ItemType.class, itemName).get()).build();
+    }
+
+    public static void giveItem(UUID id, String itemName, int number)
+    {
+        if (Warfare44.getWarfare44().getGame().getServer().getPlayer(id).isPresent())
         {
             Player player = Warfare44.getWarfare44().getGame().getServer().getPlayer(id).get();
-            if(Warfare44.getWarfare44().getGame().getRegistry().getType(ItemType.class, itemname).isPresent())
+            if (Warfare44.getWarfare44().getGame().getRegistry().getType(ItemType.class, itemName).isPresent())
             {
-                ItemStack item = ItemStack.builder().itemType(Warfare44.getWarfare44().getGame().getRegistry().getType(ItemType.class, itemname).get()).quantity(number).build();
+                ItemStack item = ItemStack.builder().itemType(Warfare44.getWarfare44().getGame().getRegistry().getType(ItemType.class, itemName).get()).quantity(number).build();
                 player.getInventory().offer(item);
             }
             else
             {
-                player.sendMessage(Text.of(TextColors.RED, "Error getting item of name " + itemname + " please report this error to staff or the discord"));
+                player.sendMessage(Text.of(TextColors.RED, "Error getting item of name " + itemName + " please report this error to staff or the discord"));
             }
         }
     }
 
-    public static void giveMaxItem(UUID id, String itemname)
+    public static void giveMaxItem(UUID id, String itemName)
     {
-        if(Warfare44.getWarfare44().getGame().getServer().getPlayer(id).isPresent())
+        if (Warfare44.getWarfare44().getGame().getServer().getPlayer(id).isPresent())
         {
             Player player = Warfare44.getWarfare44().getGame().getServer().getPlayer(id).get();
-            if (Warfare44.getWarfare44().getGame().getRegistry().getType(ItemType.class, itemname).isPresent())
+            if (Warfare44.getWarfare44().getGame().getRegistry().getType(ItemType.class, itemName).isPresent())
             {
-                ItemType item = Warfare44.getWarfare44().getGame().getRegistry().getType(ItemType.class, itemname).get();
-                giveItem(id, itemname, item.getMaxStackQuantity());
+                ItemType item = Warfare44.getWarfare44().getGame().getRegistry().getType(ItemType.class, itemName).get();
+                giveItem(id, itemName, item.getMaxStackQuantity());
             }
             else
             {
-                player.sendMessage(Text.of(TextColors.RED, "Error getting item of name " + itemname + " please report this error to staff or the discord"));
+                player.sendMessage(Text.of(TextColors.RED, "Error getting item of name " + itemName + " please report this error to staff or the discord"));
             }
         }
     }
 
-    public static void giveHead(UUID id, String itemname)
+    public static void giveHead(UUID id, String itemName)
     {
-        if(Warfare44.getWarfare44().getGame().getServer().getPlayer(id).isPresent())
+        if (Warfare44.getWarfare44().getGame().getServer().getPlayer(id).isPresent())
         {
             Player player = Warfare44.getWarfare44().getGame().getServer().getPlayer(id).get();
-            if (Warfare44.getWarfare44().getGame().getRegistry().getType(ItemType.class, itemname).isPresent())
+            if (Warfare44.getWarfare44().getGame().getRegistry().getType(ItemType.class, itemName).isPresent())
             {
-                ItemType item = Warfare44.getWarfare44().getGame().getRegistry().getType(ItemType.class, itemname).get();
+                ItemType item = Warfare44.getWarfare44().getGame().getRegistry().getType(ItemType.class, itemName).get();
                 player.setHelmet(ItemStack.of(item));
             }
             else
             {
-                player.sendMessage(Text.of(TextColors.RED, "Error getting item of name " + itemname + " please report this error to staff or the discord"));
+                player.sendMessage(Text.of(TextColors.RED, "Error getting item of name " + itemName + " please report this error to staff or the discord"));
             }
         }
     }
 
-    public static void giveChest(UUID id, String itemname)
+    public static void giveChest(UUID id, String itemName)
     {
-        if(Warfare44.getWarfare44().getGame().getServer().getPlayer(id).isPresent())
+        if (Warfare44.getWarfare44().getGame().getServer().getPlayer(id).isPresent())
         {
             Player player = Warfare44.getWarfare44().getGame().getServer().getPlayer(id).get();
-            if (Warfare44.getWarfare44().getGame().getRegistry().getType(ItemType.class, itemname).isPresent())
+            if (Warfare44.getWarfare44().getGame().getRegistry().getType(ItemType.class, itemName).isPresent())
             {
-                ItemType item = Warfare44.getWarfare44().getGame().getRegistry().getType(ItemType.class, itemname).get();
+                ItemType item = Warfare44.getWarfare44().getGame().getRegistry().getType(ItemType.class, itemName).get();
                 player.setChestplate(ItemStack.of(item));
             }
             else
             {
-                player.sendMessage(Text.of(TextColors.RED, "Error getting item of name " + itemname + " please report this error to staff or the discord"));
+                player.sendMessage(Text.of(TextColors.RED, "Error getting item of name " + itemName + " please report this error to staff or the discord"));
             }
         }
     }
 
-    public static void giveLegs(UUID id, String itemname)
+    public static void giveLegs(UUID id, String itemName)
     {
-        if(Warfare44.getWarfare44().getGame().getServer().getPlayer(id).isPresent())
+        if (Warfare44.getWarfare44().getGame().getServer().getPlayer(id).isPresent())
         {
             Player player = Warfare44.getWarfare44().getGame().getServer().getPlayer(id).get();
-            if (Warfare44.getWarfare44().getGame().getRegistry().getType(ItemType.class, itemname).isPresent())
+            if (Warfare44.getWarfare44().getGame().getRegistry().getType(ItemType.class, itemName).isPresent())
             {
-                ItemType item = Warfare44.getWarfare44().getGame().getRegistry().getType(ItemType.class, itemname).get();
+                ItemType item = Warfare44.getWarfare44().getGame().getRegistry().getType(ItemType.class, itemName).get();
                 player.setLeggings(ItemStack.of(item));
             }
             else
             {
-                player.sendMessage(Text.of(TextColors.RED, "Error getting item of name " + itemname + " please report this error to staff or the discord"));
+                player.sendMessage(Text.of(TextColors.RED, "Error getting item of name " + itemName + " please report this error to staff or the discord"));
             }
         }
     }
 
-    public static void giveBoots(UUID id, String itemname)
+    public static void giveBoots(UUID id, String itemName)
     {
-        if(Warfare44.getWarfare44().getGame().getServer().getPlayer(id).isPresent())
+        if (Warfare44.getWarfare44().getGame().getServer().getPlayer(id).isPresent())
         {
             Player player = Warfare44.getWarfare44().getGame().getServer().getPlayer(id).get();
-            if (Warfare44.getWarfare44().getGame().getRegistry().getType(ItemType.class, itemname).isPresent())
+            if (Warfare44.getWarfare44().getGame().getRegistry().getType(ItemType.class, itemName).isPresent())
             {
-                ItemType item = Warfare44.getWarfare44().getGame().getRegistry().getType(ItemType.class, itemname).get();
+                ItemType item = Warfare44.getWarfare44().getGame().getRegistry().getType(ItemType.class, itemName).get();
                 player.setBoots(ItemStack.of(item));
             }
             else
             {
-                player.sendMessage(Text.of(TextColors.RED, "Error getting item of name " + itemname + " please report this error to staff or the discord"));
+                player.sendMessage(Text.of(TextColors.RED, "Error getting item of name " + itemName + " please report this error to staff or the discord"));
             }
         }
     }
 
-    public static void giveAccessory(UUID id, String itemname, String accslot)
+    public static void giveAccessory(UUID id, String itemName, String accessorySlot)
     {
+        if (Warfare44.getWarfare44().getGame().getServer().getPlayer(id).isPresent())
+        {
+            Player player = Warfare44.getWarfare44().getGame().getServer().getPlayer(id).get();
+            MArmorType type = MArmorType.valueOf(accessorySlot);
+            ArmorApi.setArmorInSlot((EntityPlayer) player, type.getFirstSlot(), new net.minecraft.item.ItemStack(Modulus.specialArmorTypes.get(itemName)));
+        }
     }
 }
