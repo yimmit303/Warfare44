@@ -5,10 +5,10 @@
         "version": "0.2.2",
         "description": "Custom team death matches and classes",
         "dependencies": [
-            "spongeapi@7.1.0"
+            "spongeapi@7.1.0-ea50f0c2"
         ],
         "requiredMods": [
-            "spongeapi@7.1.0"
+            "spongeapi@7.1.0-ea50f0c2"
         ]
     }
 ]

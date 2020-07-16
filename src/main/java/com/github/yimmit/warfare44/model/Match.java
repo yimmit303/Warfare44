@@ -217,6 +217,14 @@ public class Match
         InventoryUtil.giveChest(id, "modulus:w44." + Warfare44.getWarfare44().getConfig().CLASSES.mCountryClassList.get(country).mClassList.get(playerclass).mChest);
         InventoryUtil.giveLegs(id, "modulus:w44." + Warfare44.getWarfare44().getConfig().CLASSES.mCountryClassList.get(country).mClassList.get(playerclass).mLegs);
         InventoryUtil.giveBoots(id, "modulus:w44." + Warfare44.getWarfare44().getConfig().CLASSES.mCountryClassList.get(country).mClassList.get(playerclass).mBoots);
+
+        InventoryUtil.giveAccessory(id, "w44." + Warfare44.getWarfare44().getConfig().CLASSES.mCountryClassList.get(country).mClassList.get(playerclass).mUpperface, "UpperFace");
+        InventoryUtil.giveAccessory(id, "w44." + Warfare44.getWarfare44().getConfig().CLASSES.mCountryClassList.get(country).mClassList.get(playerclass).mLowerface, "LowerFace");
+        InventoryUtil.giveAccessory(id, "w44." + Warfare44.getWarfare44().getConfig().CLASSES.mCountryClassList.get(country).mClassList.get(playerclass).mGloves, "Gloves");
+        InventoryUtil.giveAccessory(id, "w44." + Warfare44.getWarfare44().getConfig().CLASSES.mCountryClassList.get(country).mClassList.get(playerclass).mArms, "Arms");
+        InventoryUtil.giveAccessory(id, "w44." + Warfare44.getWarfare44().getConfig().CLASSES.mCountryClassList.get(country).mClassList.get(playerclass).mAccessory, "Accessory");
+        InventoryUtil.giveAccessory(id, "w44." + Warfare44.getWarfare44().getConfig().CLASSES.mCountryClassList.get(country).mClassList.get(playerclass).mBackpack, "Backpack");
+        InventoryUtil.giveAccessory(id, "w44." + Warfare44.getWarfare44().getConfig().CLASSES.mCountryClassList.get(country).mClassList.get(playerclass).mVest, "Vest");
     }
 
     private void countdown()
