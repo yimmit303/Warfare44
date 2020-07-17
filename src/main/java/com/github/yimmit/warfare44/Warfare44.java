@@ -1,8 +1,11 @@
 package com.github.yimmit.warfare44;
 
 import com.github.yimmit.warfare44.commands.*;
+
 import com.github.yimmit.warfare44.config.Configcategory;
 import com.github.yimmit.warfare44.config.WorldCategory;
+import com.github.yimmit.warfare44.userdata.PlayerList;
+
 import com.github.yimmit.warfare44.deathmatch.Deathmatch;
 import com.github.yimmit.warfare44.listeners.*;
 import ninja.leaping.configurate.ConfigurationNode;
@@ -14,6 +17,7 @@ import ninja.leaping.configurate.objectmapping.GuiceObjectMapperFactory;
 import org.spongepowered.api.Game;
 import org.spongepowered.api.Sponge;
 import org.spongepowered.api.config.ConfigDir;
+import org.spongepowered.api.entity.living.player.Player;
 import org.spongepowered.api.event.game.state.*;
 import org.spongepowered.api.plugin.Plugin;
 import org.spongepowered.api.event.Listener;
@@ -46,10 +50,13 @@ public class Warfare44 {
     private Path configDir;
     private ConfigurationLoader<CommentedConfigurationNode> cfgLoader;
     private ConfigurationLoader<CommentedConfigurationNode> dataLoader;
-    private Configcategory configData; //Used to access the values of config.conf seen in W44config.javas
+    private ConfigurationLoader<CommentedConfigurationNode> userDataLoader;
     private ConfigurationNode dataNode;
     private ConfigurationNode configNode;
-    private WorldCategory worldData;
+    private ConfigurationNode userDataNode;
+    private Configcategory configData;  //Used to access the values of config.conf seen in W44config
+    private WorldCategory worldData;    //Used to access the values of data.conf seen in W44config
+    private PlayerList userData;    //Used to access the values of userdata.conf seen in W44config
     private ArrayList<String> validClasses = new ArrayList<>();
 
     private static Warfare44 warfare44;
@@ -70,6 +77,7 @@ public class Warfare44 {
 
         cfgLoader = HoconConfigurationLoader.builder().setFile(new File(configDir.toFile(), "config.conf")).build();
         dataLoader = HoconConfigurationLoader.builder().setFile(new File(configDir.toFile(), "data.conf")).build();
+        userDataLoader = HoconConfigurationLoader.builder().setFile(new File(configDir.toFile(), "userdata.conf")).build();
         initConfig();
 
         this.dm = new Deathmatch();
@@ -128,6 +136,10 @@ public class Warfare44 {
             worldData = dataNode.getValue(of(WorldCategory.class), new WorldCategory());
             dataLoader.save(dataNode);
 
+            userDataNode = userDataLoader.load(ConfigurationOptions.defaults().setObjectMapperFactory(factory).setShouldCopyDefaults(true));
+            userData = userDataNode.getValue(of(PlayerList.class), new PlayerList());
+            userDataLoader.save(userDataNode);
+
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -167,6 +179,26 @@ public class Warfare44 {
         try
         {
             cfgLoader.save(configNode);
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+        }
+    }
+
+    public void saveUserData()
+    {
+        try
+        {
+            userDataNode.setValue(of(PlayerList.class), userData);
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+        }
+        try
+        {
+            userDataLoader.save(userDataNode);
         }
         catch (Exception e)
         {
@@ -219,6 +251,14 @@ public class Warfare44 {
     public WorldCategory getWorldData()
     {
         return worldData;
+    }
+
+    public PlayerList getUserData() {
+        return userData;
+    }
+
+    public ConfigurationLoader<CommentedConfigurationNode> getUserDataLoader() {
+        return userDataLoader;
     }
 
     public static Warfare44 getWarfare44()
