@@ -22,30 +22,19 @@ public class InventoryUtil {
         {
             Player player = Warfare44.getWarfare44().getGame().getServer().getPlayer(id).get();
             player.getInventory().clear();
-            clearAccesories(id);
+            clearAccesories(player);
         }
     }
 
-    private static void clearAccesories(UUID id)
+    private static void clearAccesories(Player player)
     {
-        String[] AccesorieSlots = {
-                "UpperFace"
-                , "LowerFace"
-                , "Gloves"
-                , "Arms"
-                , "Accessory"
-                , "Backpack"
-                , "Vest"
-        };
+        String[] AccesorieSlots = {"UpperFace" , "LowerFace" , "Gloves" , "Arms" , "Accessory" , "Backpack" , "Vest"};
         for(int i = 0; i < 7; i++)
         {
             String accessorySlot = AccesorieSlots[i];
-            Player player = Warfare44.getWarfare44().getGame().getServer().getPlayer(id).get();
             MArmorType type = MArmorType.valueOf(accessorySlot);
             ArmorApi.setArmorInSlot((EntityPlayer) player, type.getFirstSlot(), new net.minecraft.item.ItemStack(Modulus.specialArmorTypes.get("")));
         }
-
-
     }
 
     public static ItemStack getItemStackByName(String itemName)
