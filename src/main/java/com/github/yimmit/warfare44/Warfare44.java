@@ -123,6 +123,7 @@ public class Warfare44 {
         game.getCommandManager().register(this, SetMapSpawnCommand.commandSpec(), "setmapspawn");
         game.getCommandManager().register(this, ReloadDeathmatchCommand.commandSpec(), "reloaddm");
         game.getCommandManager().register(this, SetMapCountriesCommand.commandSpec(), "setmapcountry");
+        game.getCommandManager().register(this, ShowRankCommand.commandSpec(), "showrank");
     }
 
     private void initConfig()
