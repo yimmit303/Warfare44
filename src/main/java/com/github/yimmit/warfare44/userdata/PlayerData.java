@@ -9,5 +9,17 @@ import java.util.ArrayList;
 public class PlayerData
 {
     @Setting(value = "last-logged")
-    String mLastLogged = "";    // In the form yyyy/mm/dd
+    public String mLastLogged;    // In the form yyyy/mm/dd
+    @Setting(value = "assault-rank")
+    public int mAssaultRank = 1;
+    @Setting(value = "recon-rank")
+    public int mReconRank = 1;
+    @Setting(value = "medic-rank")
+    public int mMedicRank = 1;
+    @Setting(value = "support-rank")
+    public int mSupportRank = 1;
+    @Setting(value = "engineer-rank")
+    public int mEngineerRank = 1;
+    @Setting(value = "overall-rank")
+    public int mOverallRank = 1;
 }
