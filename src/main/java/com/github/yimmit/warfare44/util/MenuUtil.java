@@ -25,12 +25,18 @@ import java.util.stream.Collectors;
 public class MenuUtil
 {
     private int mMatchNumber;
+    private MenuType mOpenInventory;
+
+    public enum MenuType {
+        CLASS, RANK, SHOP
+    }
 
     public Inventory createClassMenu(int num)
     {
         mMatchNumber = num;
-        Inventory inv =  Inventory.builder().of(InventoryArchetypes.HOPPER)
-                        .property(InventoryTitle.of(Text.of("Pick your class")))
+        mOpenInventory = MenuType.CLASS;
+        Inventory inv =  Inventory.builder().of(InventoryArchetypes.DOUBLE_CHEST)
+                        .property(InventoryTitle.of(Text.of("")))
                         .listener(ClickInventoryEvent.class, this::processClick).build(Warfare44.getWarfare44());
         populateInventory(inv);
         return inv;
@@ -39,9 +45,9 @@ public class MenuUtil
     private void populateInventory(Inventory inv)
     {
         HashMap<Integer, ItemStack> contents = setInventoryContents(new HashMap<>());
-        for (int slot : contents.keySet()) {
-            inv.query(QueryOperationTypes.INVENTORY_PROPERTY.of(SlotIndex.of(slot))).first()
-                    .set(contents.get(slot));
+        for (int slot : contents.keySet())
+        {
+            inv.query(QueryOperationTypes.INVENTORY_PROPERTY.of(SlotIndex.of(slot))).first().set(contents.get(slot));
         }
     }
 
@@ -63,6 +69,7 @@ public class MenuUtil
             ItemStack primary = InventoryUtil.getItemStackByName("modulus:w44." + Warfare44.getWarfare44().getConfig().CLASSES.mCountryClassList.get("American").mClassList.get(dmclass).mPrimary);
             String dmuppercase = dmclass.substring(0, 1).toUpperCase() + dmclass.substring(1);
             primary.offer(Keys.DISPLAY_NAME, Text.of(dmuppercase));
+            primary.setQuantity(128);
             primaries.add(primary);
         }
         return primaries;
@@ -90,27 +97,25 @@ public class MenuUtil
                 {
                     mMatchNumber = Warfare44.getWarfare44().getDeathMatch().getFirstOpenMatch();
                 }
-                if (slot == 0)
+                Game game = Warfare44.getWarfare44().getGame();
+                switch (slot)
                 {
-                    Game game = Warfare44.getWarfare44().getGame();
-                    game.getCommandManager().process(player, "join " + mMatchNumber + " assault");
+                    case 0:
+                        game.getCommandManager().process(player, "join " + mMatchNumber + " assault");
+                        break;
+                    case 1:
+                        game.getCommandManager().process(player, "join " + mMatchNumber + " recon");
+                        break;
+                    case 2:
+                        game.getCommandManager().process(player, "join " + mMatchNumber + " medic");
+                        break;
+                    case 3:
+                        game.getCommandManager().process(player, "join " + mMatchNumber + " support");
+                        break;
+                    case 4:
+                        game.getCommandManager().process(player, "join " + mMatchNumber + " engineer");
+                        break;
                 }
-                else if (slot == 1)
-                {
-                    Game game = Warfare44.getWarfare44().getGame();
-                    game.getCommandManager().process(player, "join " + mMatchNumber + " recon");
-                }
-                else if (slot == 2)
-                {
-                    Game game = Warfare44.getWarfare44().getGame();
-                    game.getCommandManager().process(player, "join " + mMatchNumber + " medic");
-                }
-                else if (slot == 3)
-                {
-                    Game game = Warfare44.getWarfare44().getGame();
-                    game.getCommandManager().process(player, "join " + mMatchNumber + " support");
-                }
-
             }
         }).submit(Warfare44.getWarfare44());
     }
