@@ -17,11 +17,15 @@ public class ScoreboardUtil {
 
     public static void initialize() {
         Scoreboard.Builder builder = Scoreboard.builder();
-        deaths = Objective.builder().displayName(Text.of("Deaths")).criterion(Criteria.DEATHS).build();
-        kills = Objective.builder().displayName(Text.of("Kills")).criterion(Criteria.PLAYER_KILLS).build();
+        deaths = Objective.builder().displayName(Text.of("Deaths")).name("deaths").criterion(Criteria.DEATHS).build();
+        kills = Objective.builder().displayName(Text.of("Kills")).name("kills").criterion(Criteria.PLAYER_KILLS).build();
         scoreboard = builder.objectives(new ArrayList<>(Arrays.asList(deaths, kills))).build();
         scoreboard.updateDisplaySlot(deaths, DisplaySlots.LIST);
         scoreboard.updateDisplaySlot(kills, DisplaySlots.SIDEBAR);
+    }
+
+    public static Scoreboard getScoreboard() {
+        return scoreboard;
     }
 
     public static void resetDeaths() {

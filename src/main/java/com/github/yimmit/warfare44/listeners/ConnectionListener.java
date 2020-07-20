@@ -1,6 +1,7 @@
 package com.github.yimmit.warfare44.listeners;
 
 import com.github.yimmit.warfare44.Warfare44;
+import com.github.yimmit.warfare44.util.ScoreboardUtil;
 import org.slf4j.Logger;
 import org.spongepowered.api.data.key.Keys;
 import org.spongepowered.api.entity.living.player.Player;
@@ -19,7 +20,6 @@ public class ConnectionListener
     {
         Logger log = Warfare44.getWarfare44().getLogger();
         log.info("Player connecting");
-
     }
 
     @Listener
@@ -27,5 +27,6 @@ public class ConnectionListener
     {
         Player p = event.getTargetEntity();
         p.offer(Keys.GAME_MODE, GameModes.ADVENTURE);
+        p.setScoreboard(ScoreboardUtil.getScoreboard());
     }
 }
