@@ -5,6 +5,7 @@ import com.github.yimmit.warfare44.config.Configcategory;
 import com.github.yimmit.warfare44.config.WorldCategory;
 import com.github.yimmit.warfare44.deathmatch.Deathmatch;
 import com.github.yimmit.warfare44.listeners.*;
+import com.github.yimmit.warfare44.util.ScoreboardUtil;
 import ninja.leaping.configurate.ConfigurationNode;
 import ninja.leaping.configurate.ConfigurationOptions;
 import ninja.leaping.configurate.commented.CommentedConfigurationNode;
@@ -71,6 +72,8 @@ public class Warfare44 {
         initConfig();
 
         this.dm = new Deathmatch();
+
+        ScoreboardUtil.initialize();
     }
 
     @Listener
