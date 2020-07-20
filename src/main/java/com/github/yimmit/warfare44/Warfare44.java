@@ -57,14 +57,12 @@ public class Warfare44 {
 
     //Method used for all plugin initialization
     @Listener
-    public void onServerStart(GameStartedServerEvent event)
-    {
+    public void onServerStart(GameStartedServerEvent event) {
         validClasses.add("assault");
         validClasses.add("recon");
         validClasses.add("medic");
         validClasses.add("support");
-        if(!configDir.toFile().exists())
-        {
+        if (!configDir.toFile().exists()) {
             configDir.toFile().mkdir();
         }
 
@@ -76,27 +74,23 @@ public class Warfare44 {
     }
 
     @Listener
-    public void onLoadingComplete(GameLoadCompleteEvent event)
-    {
+    public void onLoadingComplete(GameLoadCompleteEvent event) {
 
     }
 
     @Listener
-    public void preInit(GamePreInitializationEvent event)
-    {
+    public void preInit(GamePreInitializationEvent event) {
         warfare44 = this;
         logger.info("Warfare44 started");
     }
 
     @Listener
-    public void onGameInit(GameInitializationEvent e)
-    {
+    public void onGameInit(GameInitializationEvent e) {
         registerListeners();
         registerCommands();
     }
 
-    private void registerListeners()
-    {
+    private void registerListeners() {
         Sponge.getEventManager().registerListeners(this, new ConnectionListener());
         Sponge.getEventManager().registerListeners(this, new DisconnectionListener());
         Sponge.getEventManager().registerListeners(this, new SignListener());
@@ -106,9 +100,8 @@ public class Warfare44 {
         Sponge.getEventManager().registerListeners(this, new RespawnListener());
     }
 
-    private void registerCommands()
-    {
-        game.getCommandManager().register(this, JoinMatchCommand.commandSpec(),"joinmatch", "join");
+    private void registerCommands() {
+        game.getCommandManager().register(this, JoinMatchCommand.commandSpec(), "joinmatch", "join");
         game.getCommandManager().register(this, ExitMatchCommand.commandSpec(), "exitmatch", "leave", "exit");
         game.getCommandManager().register(this, ListMatchCommand.commandSpec(), "listmatch", "games");
         game.getCommandManager().register(this, MakeMapCommand.commandSpec(), "makemap");
@@ -117,8 +110,7 @@ public class Warfare44 {
         game.getCommandManager().register(this, SetMapCountriesCommand.commandSpec(), "setmapcountry");
     }
 
-    private void initConfig()
-    {
+    private void initConfig() {
         try {
             configNode = cfgLoader.load(ConfigurationOptions.defaults().setObjectMapperFactory(factory).setShouldCopyDefaults(true));
             configData = configNode.getValue(of(Configcategory.class), new Configcategory());
@@ -134,48 +126,33 @@ public class Warfare44 {
     }
 
 
-    public void saveDataConfig()
-    {
-        try
-        {
+    public void saveDataConfig() {
+        try {
             dataNode.setValue(of(WorldCategory.class), worldData);
-        }
-        catch (Exception e)
-        {
+        } catch (Exception e) {
             e.printStackTrace();
         }
-        try
-        {
+        try {
             dataLoader.save(dataNode);
-        }
-        catch (Exception e)
-        {
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
-    public void saveConfig()
-    {
-        try
-        {
+    public void saveConfig() {
+        try {
             configNode.setValue(of(Configcategory.class), configData);
-        }
-        catch (Exception e)
-        {
+        } catch (Exception e) {
             e.printStackTrace();
         }
-        try
-        {
+        try {
             cfgLoader.save(configNode);
-        }
-        catch (Exception e)
-        {
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
-    public void reloadDeathmatch()
-    {
+    public void reloadDeathmatch() {
         this.dm = new Deathmatch();
     }
 
@@ -184,18 +161,15 @@ public class Warfare44 {
 
     }
 
-    public Logger getLogger()
-    {
+    public Logger getLogger() {
         return logger;
     }
 
-    public Deathmatch getDeathMatch()
-    {
+    public Deathmatch getDeathMatch() {
         return dm;
     }
 
-    public Game getGame()
-    {
+    public Game getGame() {
         return game;
     }
 
@@ -203,8 +177,7 @@ public class Warfare44 {
         return cfgLoader;
     }
 
-    public Configcategory getConfig()
-    {
+    public Configcategory getConfig() {
         return configData;
     }
 
@@ -216,18 +189,15 @@ public class Warfare44 {
         return dataNode;
     }
 
-    public WorldCategory getWorldData()
-    {
+    public WorldCategory getWorldData() {
         return worldData;
     }
 
-    public static Warfare44 getWarfare44()
-    {
+    public static Warfare44 getWarfare44() {
         return warfare44;
     }
 
-    public ArrayList<String> getValidClasses()
-    {
+    public ArrayList<String> getValidClasses() {
         return validClasses;
     }
 }
